@@ -17,5 +17,5 @@
 .byebug_history
 
 
-/.idea
+.idea
 config/database.yml
