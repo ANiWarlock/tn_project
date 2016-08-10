@@ -37,6 +37,8 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+gem 'slim-rails'
+
 group :test do
   gem 'shoulda-matchers', require: false
 end
