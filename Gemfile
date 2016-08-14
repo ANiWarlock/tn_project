@@ -38,11 +38,14 @@ group :development, :test do
 end
 
 gem 'slim-rails'
+gem 'devise'
 
 
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
