@@ -8,7 +8,7 @@ feature 'View questions', %q{
 
   let(:questions) { create_list(:question, 2) }
 
-  scenario 'User open questions page' do
+  scenario 'User view questions list' do
     questions
     visit questions_path
 

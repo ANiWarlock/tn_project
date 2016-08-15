@@ -8,7 +8,7 @@ feature 'Create question', %q{
 
   let(:user) {create(:user)}
 
-  scenario 'Authenticated user creates question' do
+  scenario 'Authenticated user create question' do
     sign_in(user)
     visit questions_path
     click_on 'Ask question'
@@ -19,7 +19,7 @@ feature 'Create question', %q{
     expect(page).to have_content 'Your question successfully created.'
   end
 
-  scenario 'non-authenticated user creates question' do
+  scenario 'non-authenticated user create question' do
     visit questions_path
     click_on 'Ask question'
 
