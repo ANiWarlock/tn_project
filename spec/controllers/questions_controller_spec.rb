@@ -106,9 +106,10 @@ RSpec.describe QuestionsController, type: :controller do
       before { patch :update, params: { id: question, question: attributes_for(:invalid_question) } }
 
       it 'does not change question attributes' do
+        old_question = question
         question.reload
-        expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.title).to eq old_question.title
+        expect(question.body).to eq old_question.body
 
       end
 

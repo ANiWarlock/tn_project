@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 feature 'User registration', %q{
   In order to ask questions and give answers
   As a registered user

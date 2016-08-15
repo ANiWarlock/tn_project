@@ -1,0 +1,9 @@
+h3=@question.title
+p=@question.body
+
+-if @question.answers.any?
+  h4 Answers:
+  -@question.answers.each do |answer|
+    p=answer.body
+
+=link_to 'Give answer', new_question_answer_path(@question)
