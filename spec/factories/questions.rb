@@ -6,14 +6,11 @@ FactoryGirl.define do
   factory :question do
     title
     body "MyText"
+    user
 
-    factory :question_with_answers do
-      transient do
-        answers_count 2
-      end
-
-      after(:create) do |question, evaluator|
-        create_list(:answer, evaluator.answers_count, question: question)
+    trait :with_answers do
+      after(:create) do |question|
+        create_list :answer, 2, question: question
       end
     end
   end
@@ -21,5 +18,6 @@ FactoryGirl.define do
   factory :invalid_question, class: "question" do
     title nil
     body nil
+    user
   end
 end

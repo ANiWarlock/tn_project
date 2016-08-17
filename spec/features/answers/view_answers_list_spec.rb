@@ -6,7 +6,7 @@ feature 'View question and answers', %q{
   I want to be able to view list of answers
 } do
 
-  let(:question) { create(:question_with_answers) }
+  let(:question) { create(:question, :with_answers) }
 
   scenario 'View question and answers list' do
     visit question_path(question)

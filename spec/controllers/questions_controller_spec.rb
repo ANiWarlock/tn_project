@@ -121,8 +121,9 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     sign_in_user
+    before { question.update(user_id: @user.id) }
+
     it 'deletes question' do
-      question
       expect { delete :destroy, params: { id: question} }.to change(Question, :count).by(-1)
     end
 

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question) }
+  let(:answer) { create(:answer, question: question) }
 
   describe 'GET #new' do
     sign_in_user
@@ -40,6 +41,19 @@ RSpec.describe AnswersController, type: :controller do
         post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) }
         expect(response).to render_template :new
       end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    sign_in_user
+    it 'deletes answer' do
+      answer.update(user_id: @user.id)
+      expect{ delete :destroy, params: { id: answer } }.to change(question.answers, :count).by(-1)
+    end
+
+    it 'redirects to question view' do
+      delete :destroy, params: { id: answer }
+      expect(response).to redirect_to question_path(answer.question)
     end
   end
 end
