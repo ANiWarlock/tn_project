@@ -22,10 +22,8 @@ feature 'Delete answer', %q{
   scenario "User try to delete another's user answer" do
     sign_in(create(:user))
     visit question_path(question)
-    click_on('Delete answer')
 
-    expect(page).to have_content('You are not the author.')
+    expect(page).to_not have_content('Delete answer')
     expect(current_path).to eq question_path(question)
-
   end
 end

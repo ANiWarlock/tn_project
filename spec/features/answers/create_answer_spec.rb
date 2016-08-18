@@ -12,9 +12,8 @@ feature 'Create answer', %q{
   scenario 'Authenticated user create answer' do
     sign_in(user)
     visit question_path(question)
-    click_on 'Give answer'
     fill_in 'Body', with: 'Some answer body'
-    click_on 'Create'
+    click_on 'Give answer'
 
     expect(page).to have_content('Your answer successfully created.')
     expect(page).to have_content('Some answer body')

@@ -59,7 +59,8 @@ RSpec.describe QuestionsController, type: :controller do
     context 'with valid attributes' do
 
       it 'saves the new question in the database' do
-        expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        #expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        expect { post :create, params: { question: attributes_for(:question) } }.to change(@user.questions, :count).by(1)
       end
 
       it 'redirects to show view' do
@@ -121,15 +122,30 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     sign_in_user
-    before { question.update(user_id: @user.id) }
 
-    it 'deletes question' do
-      expect { delete :destroy, params: { id: question} }.to change(Question, :count).by(-1)
+    context 'by author' do
+      before { question.update(user_id: @user.id) }
+
+      it 'deletes question' do
+        expect { delete :destroy, params: { id: question} }.to change(Question, :count).by(-1)
+      end
+
+      it 'redirects to index view' do
+        delete :destroy, params: { id: question}
+        expect(response).to redirect_to questions_path
+      end
     end
 
-    it 'redirects to index view' do
-      delete :destroy, params: { id: question}
-      expect(response).to redirect_to questions_path
+    context 'by not author' do
+      before { question }
+      it 'does not delete question' do
+        expect { delete :destroy, params: { id: question} }.to change(Question, :count).by(0)
+      end
+
+      it 'redirects to question view' do
+        delete :destroy, params: { id: question}
+        expect(response).to redirect_to question
+      end
     end
   end
 end
