@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
 
-  def author_of?(question)
-    question.user_id == self.id
+  def author_of?(resource)
+    resource.user_id == self.id
   end
 end

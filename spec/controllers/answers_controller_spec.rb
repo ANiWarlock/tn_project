@@ -10,6 +10,9 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'saves the new answer in the database'do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
+      end
+
+      it 'belong to logged in user' do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(@user.answers, :count).by(1)
       end
 
@@ -50,7 +53,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'by not author' do
       it 'does not delete answer' do
         answer#.update(user_id: @user.id)
-        expect{ delete :destroy, params: { id: answer } }.to change(question.answers, :count).by(0)
+        expect{ delete :destroy, params: { id: answer } }.to_not change(Answer, :count)
       end
 
       it 'redirects to question view' do
