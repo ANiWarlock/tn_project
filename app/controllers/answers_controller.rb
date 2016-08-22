@@ -8,7 +8,6 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:notice] = 'Your answer successfully created.'
     end
-    redirect_to @question
   end
 
   def destroy
