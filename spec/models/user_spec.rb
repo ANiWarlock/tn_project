@@ -12,11 +12,11 @@ RSpec.describe User, type: :model do
 
     it 'returns true if resource.user_id == self.id' do
       answer.user = user
-      expect(user.author_of?(answer)).to be true
+      expect(user).to be_author_of(answer)
     end
 
     it 'returns false if resource.user_id != self.id' do
-      expect(user.author_of?(answer)).to be false
+      expect(user).not_to be_author_of(answer)
     end
   end
 end

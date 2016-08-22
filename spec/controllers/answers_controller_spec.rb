@@ -8,17 +8,13 @@ RSpec.describe AnswersController, type: :controller do
     sign_in_user
     context 'with valid attributes' do
 
-      it 'saves the new answer in the database'do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
-      end
-
       it 'belong to logged in user' do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(@user.answers, :count).by(1)
       end
 
       it 'redirects to question path' do
         post :create, params: { question_id: question, answer: attributes_for(:answer) }
-        expect(response).to redirect_to question_path(assigns(:question))
+        expect(response).to redirect_to assigns(:question)
       end
     end
 
@@ -41,24 +37,22 @@ RSpec.describe AnswersController, type: :controller do
     context 'by author' do
       it 'deletes answer' do
         answer.update(user_id: @user.id)
-        expect{ delete :destroy, params: { id: answer } }.to change(question.answers, :count).by(-1)
+        expect{ delete :destroy, params: { id: answer } }.to change(@user.answers, :count).by(-1)
       end
 
       it 'redirects to question view' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+        expect( delete :destroy, params: { id: answer } ).to redirect_to answer.question
       end
     end
 
     context 'by not author' do
       it 'does not delete answer' do
-        answer#.update(user_id: @user.id)
+        answer
         expect{ delete :destroy, params: { id: answer } }.to_not change(Answer, :count)
       end
 
       it 'redirects to question view' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+        expect( delete :destroy, params: { id: answer } ).to redirect_to answer.question
       end
     end
   end
