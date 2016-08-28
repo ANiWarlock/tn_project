@@ -12,7 +12,11 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
-    @answer.update(answer_params)
+    if current_user.author_of?(@answer)
+      @answer.update(answer_params)
+    else
+      redirect_to @answer.question
+    end
   end
 
   def destroy
@@ -23,7 +27,6 @@ class AnswersController < ApplicationController
     else
       flash[:notice] = 'You are not the author.'
     end
-    redirect_to @answer.question
   end
 
   private

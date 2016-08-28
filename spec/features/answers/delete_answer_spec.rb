@@ -10,7 +10,7 @@ feature 'Delete answer', %q{
   let!(:answer) { create(:answer, question: question) }
 
 
-  scenario 'Answer author try to delete answer' do
+  scenario 'Answer author try to delete answer', js: true do
     sign_in(answer.user)
     visit question_path(question)
     click_on('Delete answer')

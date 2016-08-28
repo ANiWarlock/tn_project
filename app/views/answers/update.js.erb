@@ -1,9 +1,9 @@
 <% if @answer.errors.present? %>
+  $('.answer-<%= @answer.id %> > form > .answer-errors').html('');
   <% @answer.errors.full_messages.each do |message| %>
-    $('.answer-errors').html('<%= j message %>');
+    $('.answer-<%= @answer.id %> > form > .answer-errors').append('<%= j message %>');
   <% end %>
 <% else %>
   $('.answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
-  $('.answer-errors').html('');
   $(".notice").html("<%= flash[:notice] %>");
 <% end %>

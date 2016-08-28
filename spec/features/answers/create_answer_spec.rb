@@ -19,6 +19,9 @@ feature 'Create answer', %q{
     within '.answers' do
       expect(page).to have_content('Some answer body')
     end
+    within '.new_answer' do
+      expect(page).to_not have_content('Some answer body')
+    end
     expect(current_path).to eq question_path(question)
   end
 

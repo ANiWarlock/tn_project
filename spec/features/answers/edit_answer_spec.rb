@@ -38,11 +38,11 @@ feature 'Editing answer', %q{
         click_on 'Edit answer'
         fill_in 'Answer', with: 'edited answer'
         click_on 'Save'
-      end
 
-      expect(page).to_not have_content answer.body
-      expect(page).to have_content 'edited answer'
-      expect(page).to_not have_selector 'textarea'
+        expect(page).to_not have_content answer.body
+        expect(page).to have_content 'edited answer'
+        expect(page).to_not have_selector 'textarea'
+      end
     end
   end
 
