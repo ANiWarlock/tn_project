@@ -1,2 +1,10 @@
-p=answer.body
-=link_to 'Delete answer', answer_path(answer), method: :delete if user_signed_in? && current_user.author_of?(answer)
+div class="answer-#{answer.id}"
+  p=answer.body
+  -if user_signed_in? && current_user.author_of?(answer)
+    p= link_to 'Delete answer', answer_path(answer), method: :delete
+    p= link_to 'Edit answer', '', class: 'edit-answer-link', data: { answer_id: answer.id}
+    p
+      = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+        = f.label :body, 'Answer'
+        = f.text_area :body
+        = f.submit 'Save'

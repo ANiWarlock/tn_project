@@ -41,7 +41,7 @@ end
 
 gem 'slim-rails'
 gem 'devise'
-
+gem 'jquery-turbolinks'
 
 group :test do
   gem 'shoulda-matchers', require: false
