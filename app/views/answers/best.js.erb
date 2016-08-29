@@ -1,0 +1,5 @@
+answer = $('.answer-<%= @answer.id %>').detach();
+$('.answers > h4').after(answer);
+
+$('.best-answer').removeClass('best-answer');
+$('.answer-<%= @answer.id %>').addClass('best-answer');

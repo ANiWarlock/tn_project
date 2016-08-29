@@ -19,7 +19,7 @@ feature 'Editing answer', %q{
       visit question_path(question)
 
       within '.answers' do
-        expect(page).to have_link 'Edit answer'           #TODO
+        expect(page).to have_link 'Edit answer'
       end
     end
 
@@ -27,7 +27,7 @@ feature 'Editing answer', %q{
       visit question_path(question)
 
       within '.answers' do
-        expect(page).to_not have_link 'Edit answer'       #TODO
+        expect(page).to_not have_link 'Edit answer'
       end
     end
 
@@ -51,7 +51,7 @@ feature 'Editing answer', %q{
     visit question_path(question)
 
     within '.answers' do
-      expect(page).to_not have_link 'Edit answer'       #TODO
+      expect(page).to_not have_link 'Edit answer'
     end
   end
 end

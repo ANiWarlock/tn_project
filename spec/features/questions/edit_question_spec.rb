@@ -18,7 +18,7 @@ feature 'Editing question', %q{
       visit question_path(question)
 
       within '.question' do
-        expect(page).to have_link 'Edit question'           #TODO
+        expect(page).to have_link 'Edit question'
       end
     end
 
@@ -26,7 +26,7 @@ feature 'Editing question', %q{
       visit question_path(question)
 
       within '.question' do
-        expect(page).to_not have_link 'Edit question'       #TODO
+        expect(page).to_not have_link 'Edit question'
       end
     end
 
@@ -54,7 +54,7 @@ feature 'Editing question', %q{
     visit question_path(question)
 
     within '.question' do
-      expect(page).to_not have_link 'Edit question'       #TODO
+      expect(page).to_not have_link 'Edit question'
     end
   end
 

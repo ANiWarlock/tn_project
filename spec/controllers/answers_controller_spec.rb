@@ -93,4 +93,28 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #best' do
+    sign_in_user
+    context 'by question author' do
+      it 'sets answer to be the question.best_answer' do
+        question.update(user: @user)
+        patch :best, params: { id: answer, question_id: question }, format: :js
+        question.reload
+
+        expect(question.best_answer).to eq answer
+      end
+    end
+
+    context 'by not question author' do
+      it 'does not change best answer' do
+        answer2 = create(:answer, question: question)
+        answer2.update(best: true)
+        patch :best, params: { id: answer, question_id: question }, format: :js
+        question.reload
+
+        expect(question.best_answer).to eq answer2
+      end
+    end
+  end
 end

@@ -2,6 +2,13 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: :create
 
+  def best
+    @answer = Answer.find(params[:id])
+    if current_user.author_of?(@answer.question)
+      @answer.set_best
+    end
+  end
+
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
