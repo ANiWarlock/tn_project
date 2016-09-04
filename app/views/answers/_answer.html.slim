@@ -2,7 +2,7 @@
   div class="answer-#{answer.id} #{'best-answer' if answer.best}"
     p=answer.body
     -if user_signed_in? && current_user.author_of?(answer)
-      p= link_to 'Delete answer', answer_path(answer), method: :delete, :remote => true
+      p= link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
       p= link_to 'Edit answer', '', class: 'edit-answer-link', data: { answer_id: answer.id}
       p
         = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
@@ -11,4 +11,4 @@
           = f.text_area :body
           = f.submit 'Save'
     -if user_signed_in? && current_user.author_of?(answer.question)
-      p= link_to 'Best answer!', best_answer_path(answer), method: :patch, :remote => true, class: 'best-answer-link', data: { answer_id: answer.id}
+      p= link_to 'Best answer!', best_answer_path(answer), method: :patch, remote: true, class: 'best-answer-link', data: { answer_id: answer.id}

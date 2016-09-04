@@ -7,10 +7,8 @@ class Answer < ApplicationRecord
 
   def set_best
     unless best
-      Answer.transaction do
         self.question.answers.update_all(best: false)
         self.update(best: true)
-      end
     end
   end
 end

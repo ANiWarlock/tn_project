@@ -28,8 +28,7 @@ RSpec.describe Answer, type: :model do
     end
 
     it 'sets the old best_answer best attr to false'do
-      answer2 = create(:answer, question: question)
-      answer2.set_best
+      answer2 = create(:answer, question: question, best: true)
       answer.set_best
       answer2.reload
 

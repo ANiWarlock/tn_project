@@ -108,12 +108,9 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'by not question author' do
       it 'does not change best answer' do
-        answer2 = create(:answer, question: question)
-        answer2.update(best: true)
         patch :best, params: { id: answer, question_id: question }, format: :js
-        question.reload
 
-        expect(question.best_answer).to eq answer2
+        expect(response.response_code).to eq 403
       end
     end
   end
