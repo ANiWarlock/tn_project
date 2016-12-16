@@ -4,9 +4,8 @@ class Question < ApplicationRecord
   has_many :attachments, as: :attachable
 
   validates :title, :body, :user_id, presence: true
-  #validates :best_answer, :length => { :maximum => 1 } #???
 
-  accepts_nested_attributes_for :attachments
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
 
   def best_answer
