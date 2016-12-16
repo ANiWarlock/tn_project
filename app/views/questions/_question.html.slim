@@ -1,5 +1,10 @@
 h3=@question.title
 p=@question.body
+p
+  - if @question.attachments.any?
+    .attachments
+      ul
+        = render @question.attachments
 -if user_signed_in? && current_user.author_of?(@question)
   p=link_to 'Delete question', question_path(@question), method: :delete
   p=link_to 'Edit question', '', class: 'edit-question-link'
@@ -7,6 +12,10 @@ p=@question.body
     .question-errors
     = f.label :title
     = f.text_field :title
+    br
     = f.label :body
     = f.text_area :body
     = f.submit 'Save'
+    br
+    .links
+      = link_to_add_association 'add attachments', f, :attachments, partial: 'attachments/attachment_fields'

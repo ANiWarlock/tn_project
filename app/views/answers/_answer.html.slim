@@ -1,6 +1,11 @@
 - if answer.persisted?
   div class="answer-#{answer.id} #{'best-answer' if answer.best}"
     p=answer.body
+    p
+      - if answer.attachments.any?
+        .attachments
+          ul
+            = render answer.attachments
     -if user_signed_in? && current_user.author_of?(answer)
       p= link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
       p= link_to 'Edit answer', '', class: 'edit-answer-link', data: { answer_id: answer.id}
@@ -10,5 +15,8 @@
           = f.label :body, 'Answer'
           = f.text_area :body
           = f.submit 'Save'
+          br
+          .links
+            = link_to_add_association 'add attachments', f, :attachments, partial: 'attachments/attachment_fields'
     -if user_signed_in? && current_user.author_of?(answer.question)
       p= link_to 'Best answer!', best_answer_path(answer), method: :patch, remote: true, class: 'best-answer-link', data: { answer_id: answer.id}

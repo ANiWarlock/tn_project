@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     resources :answers, shallow: true
   end
 
+  resources :attachments, only: [:destroy]
+
   patch 'best/:id', to: 'answers#best', as: 'best_answer'
 end

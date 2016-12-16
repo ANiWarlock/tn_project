@@ -11,4 +11,7 @@
     .new-answer-errors
     = f.label :body
     = f.text_area :body
+    br
+      .links
+        = link_to_add_association 'add attachments', f, :attachments, partial: 'attachments/attachment_fields'
     = f.submit 'Give answer'

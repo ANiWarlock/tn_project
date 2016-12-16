@@ -4,6 +4,10 @@
     $('.answer-<%= @answer.id %> > form > .answer-errors').append('<%= j message %>');
   <% end %>
 <% else %>
-  $('.answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
-  $(".notice").html("<%= flash[:notice] %>");
+  <% if remotipart_submitted? %>
+    $('.answer-<%= @answer.id %>').replaceWith("<%= j "#{render @answer}" %>");
+  <% else %>
+    $('.answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
+  <% end %>
+    $(".notice").html("<%= flash[:notice] %>");
 <% end %>
